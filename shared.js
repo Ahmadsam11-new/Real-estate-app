@@ -30,7 +30,7 @@ const C = {
     primaryLight: "#1E4855", gold: "#B8874F", goldSoft: "#EFE1CC", success: "#4F7A5E", successSoft: "#E4EEE7",
     warn: "#C08A2E", warnSoft: "#F5E9D3", danger: "#B15A47", dangerSoft: "#F3E1DC", line: "#E7E1D6",
 };
-const WA_NUMBER = "962788663349";
+const WA_NUMBER = "962799229848";
 const waLink = (msg) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 /* ============================== الترجمة ============================== */
 const STR = {
