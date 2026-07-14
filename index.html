@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>عقارات بنك الإسكان | Housing Bank Properties</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#14313C">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="بنك الإسكان">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png" type="image/png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { margin:0; padding:0; background:#0F2027; }
+  .f-display { font-family: 'Tajawal', 'Inter', sans-serif; }
+  .f-body { font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @keyframes riseIn { from { opacity:0; transform: translateY(14px);} to {opacity:1; transform: translateY(0);} }
+  .rise { animation: riseIn .3s ease both; }
+  #root { min-height: 100vh; display:flex; align-items:center; justify-content:center; color:#fff; font-family: sans-serif; text-align:center; padding:20px; }
+  @media (max-width: 480px), (display-mode: standalone) {
+    #app-shell { padding: 0 !important; }
+    .phone-frame { width: 100vw !important; height: 100vh !important; height: 100dvh !important; border-radius: 0 !important; border: none !important; box-shadow: none !important; }
+    .top-bar { top: calc(env(safe-area-inset-top, 0px) + 8px) !important; }
+    .bottom-nav-wrap { bottom: calc(env(safe-area-inset-bottom, 0px) + 10px) !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root">جاري تحميل التطبيق… / Loading app…</div>
+<script>
+  window.addEventListener('error', function (e) {
+    var root = document.getElementById('root');
+    if (root && !root.dataset.mounted) {
+      root.innerHTML = '<div style="max-width:420px;color:#fff;font-family:sans-serif;line-height:1.8">' +
+        '<div style="font-size:18px;font-weight:bold;margin-bottom:10px">⚠️ تعذر تحميل التطبيق</div>' +
+        '<div style="font-size:13px;opacity:.8;margin-bottom:14px">تأكد من اتصالك بالإنترنت، ثم أعد تحميل الصفحة.</div>' +
+        '<div style="font-size:11px;opacity:.6;direction:ltr;text-align:left;background:rgba(255,255,255,.08);padding:10px;border-radius:8px">' + (e.message || 'Unknown error') + '</div>' +
+        '</div>';
+    }
+  });
+</script>
+<script src="shared.js"></script>
+<script>
+try {
+  var rootEl = document.getElementById("root");
+  rootEl.innerHTML = "";
+  var root = ReactDOM.createRoot(rootEl);
+  root.render(React.createElement(ClientApp, null));
+  rootEl.dataset.mounted = "1";
+} catch (err) {
+  document.getElementById("root").innerHTML =
+    '<div style="max-width:420px;color:#fff;font-family:sans-serif;line-height:1.8">' +
+    '<div style="font-size:18px;font-weight:bold;margin-bottom:10px">\u26A0\uFE0F \u062A\u0639\u0630\u0631 \u062A\u0634\u063A\u064A\u0644 \u0627\u0644\u062A\u0637\u0628\u064A\u0642</div>' +
+    '<div style="font-size:11px;opacity:.6;direction:ltr;text-align:left;background:rgba(255,255,255,.08);padding:10px;border-radius:8px;white-space:pre-wrap">' + (err && err.message ? err.message : String(err)) + '</div>' +
+    '</div>';
+  console.error(err);
+}
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("service-worker.js").catch(function (e) { console.warn("SW registration failed", e); });
+  });
+}
+</script>
+</body>
+</html>
